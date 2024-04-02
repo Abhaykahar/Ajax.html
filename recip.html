@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax-1</title>
+
+</head>
+<body>
+    <table align="center" border="1" cellpadding="20" cellspacing="0">
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>ingredients</th>
+            <th>instructions</th>
+            <th>rating</th>
+            <th>image</th>
+            <tbody id="record" align="center"></tbody>
+        </tr>
+    </table>
+    
+</body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script type="text/javascript">
+    $.ajax({
+        type:"get",
+        url:"https://dummyjson.com/recipes",
+        success:function(rec){
+            let allrecies=rec.recipes;
+            let tbl='';
+            allrecies.map((item)=>{
+                console.log(item);
+                return (
+                    tbl += `
+                <tr>
+                        <td>${item.id}</td>
+                        <td>${item.name}</td>
+                        <td>${item.ingredients}</td>
+                        <td>${item.instructions}</td>
+                        <td>${item.rating}</td>
+                        <td><img src="${item.image}" class="" style="width:50%;margin:0 auto;display:block"></td>
+
+                    </tr>
+                    `
+                )
+            })
+            document.getElementById('record').innerHTML=tbl;
+        }
+    })
+</script>
+</html>

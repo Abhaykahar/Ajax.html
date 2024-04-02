@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+<body>
+    <h1 align="center">Todos</h1>
+    <table align="center" border="1" cellspacing="0" cellpadding="5">
+        <tr>
+            <th>Id</th>
+            <th>Todo</th>
+            <th>Completed</th>
+            <th>User id</th>
+        </tr>
+        <tbody id="record"></tbody>
+    </table>
+    
+
+
+    
+</body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script type="text/javascript">
+    $.ajax(
+        {
+            type:"get",
+            url:"https://dummyjson.com/todos",
+            success:function(rec){
+                let alltodos=rec.todos;
+                let tbl="";
+                alltodos.map((item)=>{
+                    return (
+                        tbl += `
+                            <tr>
+                                    <td>${item.id}</td>
+                                    <td>${item.todo}</td>
+                                    <td>${item.completed}</td>
+                                    <td>${item.userId}</td>
+                                </tr>
+                            `
+                    )
+                })
+                document.getElementById('record').innerHTML=tbl;
+            }
+        }
+    )
+</script>
+</html>
